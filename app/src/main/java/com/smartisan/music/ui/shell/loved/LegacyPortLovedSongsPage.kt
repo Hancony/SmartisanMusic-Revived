@@ -38,8 +38,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
@@ -147,7 +147,7 @@ internal fun LegacyPortLovedSongsPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         LegacyLovedSongsTitleBar(
             editMode = editMode,
@@ -368,7 +368,7 @@ private fun LegacyLovedSongsTitleBar(
         modifier = modifier
             .zIndex(1f)
             .fillMaxWidth()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.title_bar_background)),
     ) {
         Spacer(
             modifier = Modifier

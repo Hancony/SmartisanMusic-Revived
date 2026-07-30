@@ -2,7 +2,7 @@
 <LinearLayout android:orientation="vertical" android:id="@id/playback_bar" android:tag="layout/playback_bar_0" android:layout_width="match_parent" android:layout_height="wrap_content"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <View android:id="@id/playback_bar_shadow" android:tag="binding_1" android:layout_width="match_parent" android:layout_height="6.0dp" />
-    <LinearLayout android:orientation="vertical" android:id="@id/playback_bar_content" android:background="@color/white" android:layout_width="match_parent" android:layout_height="@dimen/play_back_content_height">
+    <LinearLayout android:orientation="vertical" android:id="@id/playback_bar_content" android:background="@color/surface_card" android:layout_width="match_parent" android:layout_height="@dimen/play_back_content_height">
         <RelativeLayout android:layout_width="match_parent" android:layout_height="0.0dp" android:layout_weight="1.0">
             <com.smartisan.music.ui.widgets.AlphaImageView android:layout_gravity="center_vertical" android:id="@id/album_art" android:layout_width="@dimen/daily_recommend_cover_width" android:layout_height="@dimen/daily_recommend_cover_width" android:layout_marginLeft="@dimen/float_cover_padding_left" android:scaleType="centerInside" android:layout_centerVertical="true" />
             <LinearLayout android:orientation="vertical" android:id="@id/song_info_zone" android:paddingLeft="@dimen/float_cover_padding_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toLeftOf="@id/control_zone" android:layout_toRightOf="@id/album_art" android:layout_centerVertical="true">

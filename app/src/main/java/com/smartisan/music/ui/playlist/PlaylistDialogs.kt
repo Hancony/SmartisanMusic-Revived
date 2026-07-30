@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
@@ -59,40 +60,53 @@ import com.smartisan.music.ui.components.SmartisanDialogInsetDivider
 import com.smartisan.music.ui.components.SmartisanDialogTitleStyle
 
 private val ActionSheetShape = RectangleShape
-private val DialogTextFieldBorder = Color(0xFFE2E2E2)
-private val DialogTextFieldBackground = Color(0xFFF7F8F9)
-private val DialogPlaceholder = Color(0x66000000)
-private val DialogPrimaryButtonColor = Color(0xFF5E88E8)
+private val DialogTextFieldBorder: Color
+    @Composable get() = colorResource(R.color.input_border)
+private val DialogTextFieldBackground: Color
+    @Composable get() = colorResource(R.color.surface_raised)
+private val DialogPlaceholder: Color
+    @Composable get() = colorResource(R.color.text_tertiary)
+private val DialogPrimaryButtonColor: Color
+    @Composable get() = colorResource(R.color.accent_blue)
 private val DialogPrimaryPressedButton = Color(0xFF4F77D5)
 private val DialogPrimaryBorder = Color(0xFF4C73CF)
-private val DialogSecondaryBorder = Color(0xFFDCDCDC)
-private val DialogSecondaryPressedBackground = Color(0xFFEFEFEF)
-private val DialogButtonText = Color(0x8F000000)
+private val DialogSecondaryBorder: Color
+    @Composable get() = colorResource(R.color.dialog_secondary_border)
+private val DialogSecondaryPressedBackground: Color
+    @Composable get() = colorResource(R.color.dialog_secondary_pressed)
+private val DialogButtonText: Color
+    @Composable get() = colorResource(R.color.text_button)
 private val ActionSheetScrim = Color(0x73000000)
-private val ActionSheetDivider = Color(0xFFEAEAEA)
+private val ActionSheetDivider: Color
+    @Composable get() = colorResource(R.color.action_sheet_divider)
 
-private val PlaylistActionSheetTitleStyle = TextStyle(
-    fontSize = 15.sp,
-    fontWeight = FontWeight.SemiBold,
-    color = Color(0x99000000),
-)
-private val DialogTextFieldStyle = TextStyle(
-    fontSize = 16.sp,
-    color = Color(0xDE000000),
-)
-private val PlaylistPickerTitleStyle = TextStyle(
-    fontSize = 16.sp,
-    fontWeight = FontWeight.Medium,
-    color = Color(0xCC000000),
-)
-private val PlaylistPickerSubtitleStyle = TextStyle(
-    fontSize = 13.sp,
-    color = Color(0x73000000),
-)
-private val PlaylistActionLabelStyle = TextStyle(
-    fontSize = 11.sp,
-    color = Color(0x99000000),
-)
+private val PlaylistActionSheetTitleStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 15.sp,
+        fontWeight = FontWeight.SemiBold,
+        color = colorResource(R.color.text_secondary),
+    )
+private val DialogTextFieldStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 16.sp,
+        color = colorResource(R.color.text_primary_strong),
+    )
+private val PlaylistPickerTitleStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Medium,
+        color = colorResource(R.color.text_primary),
+    )
+private val PlaylistPickerSubtitleStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 13.sp,
+        color = colorResource(R.color.text_subtitle_dim),
+    )
+private val PlaylistActionLabelStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 11.sp,
+        color = colorResource(R.color.text_secondary),
+    )
 
 @Composable
 internal fun PlaylistNameDialog(
@@ -264,7 +278,7 @@ internal fun PlaylistTrackActionDialog(
         sheetState = sheetState,
         sheetMaxWidth = Dp.Unspecified,
         shape = ActionSheetShape,
-        containerColor = Color.White,
+        containerColor = colorResource(R.color.surface_card),
         tonalElevation = 0.dp,
         scrimColor = ActionSheetScrim,
         dragHandle = null,
@@ -393,7 +407,7 @@ private fun PlaylistPickerCreateRow(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
-            .background(if (pressed) Color(0xFFF0F0F0) else Color.White)
+            .background(if (pressed) colorResource(R.color.surface_pressed) else colorResource(R.color.surface_card))
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
@@ -469,7 +483,7 @@ private fun PlaylistActionSheetCancelButton(
             .width(67.dp)
             .height(34.dp)
             .background(
-                if (pressed) DialogSecondaryPressedBackground else Color.White,
+                if (pressed) DialogSecondaryPressedBackground else colorResource(R.color.surface_card),
                 RoundedCornerShape(8.dp),
             )
             .border(1.dp, DialogSecondaryBorder, RoundedCornerShape(8.dp))
@@ -502,7 +516,7 @@ private fun PlaylistPickerRow(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(if (pressed) Color(0xFFF0F0F0) else Color.White)
+            .background(if (pressed) colorResource(R.color.surface_pressed) else colorResource(R.color.surface_card))
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
@@ -541,7 +555,7 @@ private fun DialogTextButton(
         modifier = modifier
             .height(38.dp)
             .background(
-                if (pressed) DialogSecondaryPressedBackground else Color.White,
+                if (pressed) DialogSecondaryPressedBackground else colorResource(R.color.surface_card),
                 RoundedCornerShape(6.dp),
             )
             .border(1.dp, DialogSecondaryBorder, RoundedCornerShape(6.dp))

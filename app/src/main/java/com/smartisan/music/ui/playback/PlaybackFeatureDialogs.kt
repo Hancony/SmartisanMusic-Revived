@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -314,11 +315,11 @@ private fun SleepTimerGridItem(
     val isPressed by interactionSource.collectIsPressedAsState()
 
     val backgroundColor = when {
-        selected -> Color(0xFF5E88E8)
-        isPressed -> Color(0xFFE8E8E8)
-        else -> Color(0xFFF5F5F5)
+        selected -> colorResource(R.color.accent_blue)
+        isPressed -> colorResource(R.color.surface_pressed_strong)
+        else -> colorResource(R.color.surface_subtle)
     }
-    val contentColor = if (selected) Color.White else Color(0xCC000000)
+    val contentColor = if (selected) Color.White else colorResource(R.color.text_primary)
 
     Box(
         modifier = modifier

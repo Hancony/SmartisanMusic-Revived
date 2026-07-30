@@ -2,7 +2,6 @@ package com.smartisan.music.ui.shell
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
@@ -58,8 +57,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -97,9 +96,12 @@ internal const val PlaylistRootFooterThreshold = 8
 private val PlaylistAddModeEasing = Easing { fraction ->
     1f - (1f - fraction) * (1f - fraction)
 }
-internal val PlaylistPrimaryTextColor = Color.rgb(0x35, 0x35, 0x39)
-internal val PlaylistSecondaryTextColor = Color.rgb(0xa4, 0xa7, 0xac)
-internal val PlaylistFooterTextColor = Color.rgb(0xbc, 0xbc, 0xbc)
+internal val View.PlaylistPrimaryTextColor: Int
+    get() = context.getColor(R.color.setting_item_text_color)
+internal val View.PlaylistSecondaryTextColor: Int
+    get() = context.getColor(R.color.list_text_color_small)
+internal val View.PlaylistFooterTextColor: Int
+    get() = context.getColor(R.color.footer_text_color)
 
 internal data class LegacyPlaylistTarget(
     val playlistId: String,
@@ -282,7 +284,7 @@ internal fun LegacyPortPlaylistPage(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -495,7 +497,7 @@ internal fun LegacyPortPlaylistPage(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(ComposeColor.White),
+                    .background(colorResource(R.color.page_background)),
             ) {
                 LegacyPlaylistAddModeTitleArea(
                     target = currentAddModeTarget,
@@ -651,7 +653,7 @@ internal class LegacyPlaylistBlankView(
             TextView(context).apply {
                 text = primaryText
                 gravity = Gravity.CENTER
-                setTextColor(Color.rgb(0xc8, 0xc8, 0xc8))
+                setTextColor(context.getColor(R.color.text_disabled_gray))
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 25f)
                 includeFontPadding = false
             },
@@ -662,7 +664,7 @@ internal class LegacyPlaylistBlankView(
                 TextView(context).apply {
                     text = secondaryText
                     gravity = Gravity.CENTER
-                    setTextColor(Color.rgb(0xc8, 0xc8, 0xc8))
+                    setTextColor(context.getColor(R.color.text_disabled_gray))
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                     includeFontPadding = false
                 },

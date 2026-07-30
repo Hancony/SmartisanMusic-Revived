@@ -132,7 +132,7 @@ private class LegacyPlaybackPlaylistPickerView(
 
     init {
         orientation = VERTICAL
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(ContextCompat.getColor(context, R.color.surface_card))
         isClickable = true
         addView(
             titleBar,

@@ -53,10 +53,10 @@ import com.smartisan.music.ui.widgets.EditableLayout
 private const val AlbumSwitchBaseDurationMillis = 150L
 private const val AlbumSwitchStaggerMillis = 10L
 private const val LegacyAlbumListFooterThreshold = 8
-private val LegacyAlbumPrimaryTextColor = Color.rgb(0x35, 0x35, 0x39)
-private val LegacyAlbumSecondaryTextColor = Color.rgb(0xa4, 0xa7, 0xac)
-private val LegacyAlbumSelectedTextColor = Color.rgb(0xe6, 0x40, 0x40)
-private val LegacyAlbumFooterTextColor = Color.rgb(0xbc, 0xbc, 0xbc)
+private fun legacyAlbumPrimaryTextColor(context: Context): Int = context.getColor(R.color.setting_item_text_color)
+private fun legacyAlbumSecondaryTextColor(context: Context): Int = context.getColor(R.color.list_text_color_small)
+private fun legacyAlbumSelectedTextColor(context: Context): Int = context.getColor(R.color.playing_red)
+private fun legacyAlbumFooterTextColor(context: Context): Int = context.getColor(R.color.footer_text_color)
 
 private fun android.content.res.Resources.getDimensionPixelSizeCompatFooterPadding(): Int {
     return getDimensionPixelSize(R.dimen.footer_padding)
@@ -300,7 +300,7 @@ private class LegacyAlbumRoot(context: Context) : LinearLayout(context) {
 
     init {
         orientation = VERTICAL
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.page_background))
 
         val playContainer = LayoutInflater.from(context)
             .inflate(R.layout.layout_play_container, this, false)
@@ -326,7 +326,7 @@ private class LegacyAlbumRoot(context: Context) : LinearLayout(context) {
 
         val content = FrameLayout(context).apply {
             id = R.id.fl_list_tile
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.page_background))
         }
         addView(
             content,
@@ -338,7 +338,7 @@ private class LegacyAlbumRoot(context: Context) : LinearLayout(context) {
         )
 
         listHost = FrameLayout(context).apply {
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.page_background))
             visibility = View.VISIBLE
         }
         content.addView(
@@ -355,7 +355,7 @@ private class LegacyAlbumRoot(context: Context) : LinearLayout(context) {
             dividerHeight = resources.getDimensionPixelSize(R.dimen.listview_dividerHeight)
             selector = context.getDrawable(R.drawable.listview_selector)
             cacheColorHint = Color.TRANSPARENT
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.page_background))
             layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.list_anim_layout)
             addFooterView(listFooterView, null, false)
         }
@@ -373,7 +373,7 @@ private class LegacyAlbumRoot(context: Context) : LinearLayout(context) {
             gravity = Gravity.CENTER_HORIZONTAL
             selector = ColorDrawable(Color.TRANSPARENT)
             cacheColorHint = Color.TRANSPARENT
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.page_background))
             clipChildren = false
             scrollBarStyle = View.SCROLLBARS_OUTSIDE_OVERLAY
             isVerticalScrollBarEnabled = true
@@ -487,7 +487,7 @@ private class LegacyAlbumListAdapter(
             val child = listView.getChildAt(childIndex) ?: continue
             val selected = album.songs.any { it.mediaId == currentMediaId }
             child.findViewById<TextView>(R.id.listview_item_line_one)?.setTextColor(
-                if (selected) LegacyAlbumSelectedTextColor else LegacyAlbumPrimaryTextColor,
+                if (selected) legacyAlbumSelectedTextColor(child.context) else legacyAlbumPrimaryTextColor(child.context),
             )
             (child as? EditableLayout)?.bindLegacyEditState(
                 enabled = editMode,
@@ -521,11 +521,11 @@ private class LegacyAlbumListAdapter(
         val selected = album.songs.any { it.mediaId == currentMediaId }
         view.findViewById<TextView>(R.id.listview_item_line_one)?.apply {
             text = album.title
-            setTextColor(if (selected) LegacyAlbumSelectedTextColor else LegacyAlbumPrimaryTextColor)
+            setTextColor(if (selected) legacyAlbumSelectedTextColor(context) else legacyAlbumPrimaryTextColor(context))
         }
         view.findViewById<TextView>(R.id.listview_item_line_two)?.apply {
             text = album.artist
-            setTextColor(LegacyAlbumSecondaryTextColor)
+            setTextColor(legacyAlbumSecondaryTextColor(context))
         }
         (view as? EditableLayout)?.bindLegacyEditState(
             enabled = editMode,
@@ -611,7 +611,7 @@ private class LegacyAlbumGridAdapter(
     private fun bindState(view: View, album: AlbumSummary) {
         view.findViewById<TextView>(R.id.tv_album_name)?.apply {
             text = album.title
-            setTextColor(if (album.songs.any { it.mediaId == currentMediaId }) LegacyAlbumSelectedTextColor else Color.BLACK)
+            setTextColor(if (album.songs.any { it.mediaId == currentMediaId }) legacyAlbumSelectedTextColor(context) else context.getColor(R.color.text_emphasis))
             visibility = View.VISIBLE
         }
         view.findViewById<ImageView>(R.id.empty_selected_view)?.apply {
@@ -673,7 +673,7 @@ private class LegacyAlbumGridAdapter(
                     maxLines = 1
                     setSingleLine(true)
                     textSize = 13f
-                    setTextColor(Color.BLACK)
+                    setTextColor(context.getColor(R.color.text_emphasis))
                 },
                 LinearLayout.LayoutParams(coverSize, LinearLayout.LayoutParams.WRAP_CONTENT),
             )
@@ -685,15 +685,15 @@ private class LegacyAlbumGridAdapter(
 private class LegacyAlbumFooterView(context: Context) : LinearLayout(context) {
     private val content = TextView(context).apply {
         gravity = Gravity.CENTER
-        setTextColor(LegacyAlbumFooterTextColor)
+        setTextColor(legacyAlbumFooterTextColor(context))
         setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.footer_text_size))
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.page_background))
         setPadding(0, resources.getDimensionPixelSizeCompatFooterPadding(), 0, resources.getDimensionPixelSizeCompatFooterPadding())
     }
 
     init {
         orientation = VERTICAL
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.page_background))
         addView(
             content,
             LayoutParams(

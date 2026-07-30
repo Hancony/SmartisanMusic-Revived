@@ -264,7 +264,7 @@ private fun ActionButtonGroup.setupLegacySongsSortHeader(
     selectedSortIndex: Int,
     onSortSelected: (Int) -> Unit,
 ) {
-    setActionButtonGroupBackgroundColor(Color.WHITE)
+    setActionButtonGroupBackgroundColor(context.getColor(R.color.surface_card))
     getLeftActionButton().visibility = View.GONE
     val sidePadding = resources.getDimensionPixelSize(R.dimen.button_group_left_right_padding)
     setActionButtonGroupSidePadding(sidePadding, sidePadding)

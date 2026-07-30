@@ -18,8 +18,8 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.media3.common.MediaItem
@@ -227,7 +227,7 @@ private fun LegacyPortSearchDrilldownPage(
     val titleAreaHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() + titleContentHeight
 
     Column(
-        modifier = modifier.background(ComposeColor.White),
+        modifier = modifier.background(colorResource(R.color.page_background)),
     ) {
         when (target) {
             is LegacySearchDrilldownTarget.Album -> {
@@ -259,7 +259,7 @@ private fun LegacyPortSearchDrilldownPage(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f)
-                            .background(ComposeColor.White),
+                            .background(colorResource(R.color.page_background)),
                     )
                 }
             }

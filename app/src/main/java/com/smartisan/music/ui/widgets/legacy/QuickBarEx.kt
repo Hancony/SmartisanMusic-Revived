@@ -55,7 +55,7 @@ class QuickBarEx @JvmOverloads constructor(
     private val lettersBar = LettersStripView(context)
     private val alphabetsAdapter = AlphabetsAdapter(context)
     private val gridView = GridView(context).apply {
-        setBackgroundColor(Color.parseColor("#eaeaea"))
+        setBackgroundColor(context.getColor(R.color.quickbar_grid_background))
         gravity = Gravity.CENTER
         selector = ColorDrawable(Color.TRANSPARENT)
         horizontalSpacing = gridSpacing
@@ -696,7 +696,7 @@ class QuickBarEx @JvmOverloads constructor(
                         resources.getDimension(R.dimen.smartisan_quickbarex_gridview_font_size),
                     )
                     typeface = Typeface.DEFAULT_BOLD
-                    setTextColor(Color.parseColor("#80000000"))
+                    setTextColor(context.getColor(R.color.setting_item_summary_text_color))
                     includeFontPadding = true
                 }).apply {
                     text = item

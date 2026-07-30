@@ -83,7 +83,7 @@ private fun sortPopupTitle(anchor: View): TextView {
     return TextView(anchor.context).apply {
         setText(R.string.sort_title)
         gravity = Gravity.CENTER_VERTICAL
-        setTextColor(Color.argb(0x4c, 0, 0, 0))
+        setTextColor(context.getColor(R.color.sub_title_text_color))
         setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 12f)
         typeface = Typeface.DEFAULT_BOLD
         setPadding(resources.getDimensionPixelSize(R.dimen.popup_list_title_left_margin), 0, 0, 0)

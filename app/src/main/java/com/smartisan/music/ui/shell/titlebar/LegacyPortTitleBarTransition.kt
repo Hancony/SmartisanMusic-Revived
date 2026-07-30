@@ -20,12 +20,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.smartisan.music.R
 import kotlin.math.cos
 
 private const val LegacyTitleBarTransitionMillis = 300
@@ -293,7 +294,7 @@ internal fun LegacyPortTitleBarReplacementLayers(
     BoxWithConstraints(
         modifier = modifier
             .clipToBounds()
-            .background(Color.White),
+            .background(colorResource(R.color.title_bar_background)),
     ) {
         fun Modifier.titleLayer(alpha: Float): Modifier {
             return fillMaxSize().graphicsLayer {
@@ -318,7 +319,7 @@ internal fun LegacyPortTitleBarReplacementLayers(
                     .align(Alignment.CenterStart)
                     .width(leftSlotWidth)
                     .fillMaxHeight()
-                    .background(Color.White),
+                    .background(colorResource(R.color.title_bar_background)),
             )
 
             fun Modifier.leftSlotLayer(alpha: Float, translationX: Float): Modifier {

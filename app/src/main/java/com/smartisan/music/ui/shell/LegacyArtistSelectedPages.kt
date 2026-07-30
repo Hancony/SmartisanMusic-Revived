@@ -230,9 +230,9 @@ internal class LegacyArtistAlbumsRoot(context: Context) : FrameLayout(context) {
     var viewMode: AlbumViewMode? = null
 
     init {
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.page_background))
         listHost = FrameLayout(context).apply {
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.page_background))
             visibility = View.VISIBLE
         }
         addView(
@@ -249,7 +249,7 @@ internal class LegacyArtistAlbumsRoot(context: Context) : FrameLayout(context) {
             dividerHeight = resources.getDimensionPixelSize(R.dimen.listview_dividerHeight)
             selector = context.getDrawable(R.drawable.listview_selector)
             cacheColorHint = Color.TRANSPARENT
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.page_background))
             layoutAnimation = AnimationUtils.loadLayoutAnimation(context, R.anim.list_anim_layout)
         }
         listHost.addView(
@@ -266,7 +266,7 @@ internal class LegacyArtistAlbumsRoot(context: Context) : FrameLayout(context) {
             gravity = Gravity.CENTER_HORIZONTAL
             selector = ColorDrawable(Color.TRANSPARENT)
             cacheColorHint = Color.TRANSPARENT
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.page_background))
             scrollBarStyle = View.SCROLLBARS_OUTSIDE_OVERLAY
             isVerticalScrollBarEnabled = true
             overScrollMode = View.OVER_SCROLL_ALWAYS
@@ -377,7 +377,7 @@ private class LegacyArtistAlbumListAdapter(
         val selected = item.songs.any { song -> song.mediaId == currentMediaId }
         view.findViewById<TextView>(R.id.listview_item_line_one)?.apply {
             text = item.title
-            setTextColor(if (selected) Color.rgb(0xe6, 0x40, 0x40) else LegacyArtistPrimaryTextColor)
+            setTextColor(if (selected) context.getColor(R.color.playing_red) else legacyArtistPrimaryTextColor(context))
         }
         view.findViewById<TextView>(R.id.listview_item_line_two)?.apply {
             text = context.resources.getQuantityString(
@@ -385,7 +385,7 @@ private class LegacyArtistAlbumListAdapter(
                 item.trackCount,
                 item.trackCount,
             )
-            setTextColor(LegacyArtistSecondaryTextColor)
+            setTextColor(legacyArtistSecondaryTextColor(context))
         }
     }
 }
@@ -465,7 +465,7 @@ private class LegacyArtistAlbumGridAdapter(
         val selected = item.songs.any { song -> song.mediaId == currentMediaId }
         view.findViewById<TextView>(R.id.tv_album_name)?.apply {
             text = item.title
-            setTextColor(if (selected) Color.rgb(0xe6, 0x40, 0x40) else Color.BLACK)
+            setTextColor(if (selected) context.getColor(R.color.playing_red) else context.getColor(R.color.text_emphasis))
             visibility = View.VISIBLE
         }
     }
@@ -501,7 +501,7 @@ private class LegacyArtistAlbumGridAdapter(
                     ellipsize = TextUtils.TruncateAt.END
                     setSingleLine(true)
                     textSize = 13f
-                    setTextColor(Color.BLACK)
+                    setTextColor(context.getColor(R.color.text_emphasis))
                 },
                 LinearLayout.LayoutParams(coverSize, LinearLayout.LayoutParams.WRAP_CONTENT),
             )
@@ -700,7 +700,7 @@ private class LegacyArtistAllSongsHeader(context: Context) : RelativeLayout(cont
                 albumName.legacyArtistHeaderText(
                     id = R.id.album_name,
                     textSizePx = resources.getDimension(R.dimen.text_size_medium),
-                    color = LegacyArtistPrimaryTextColor,
+                    color = legacyArtistPrimaryTextColor(context),
                 )
                 addView(
                     albumName,
@@ -712,7 +712,7 @@ private class LegacyArtistAllSongsHeader(context: Context) : RelativeLayout(cont
                 albumArtist.legacyArtistHeaderText(
                     id = R.id.album_artist_name,
                     textSizePx = resources.getDimension(R.dimen.text_size_small),
-                    color = LegacyArtistPrimaryTextColor,
+                    color = legacyArtistPrimaryTextColor(context),
                 )
                 addView(
                     albumArtist,

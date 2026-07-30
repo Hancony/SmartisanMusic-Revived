@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewConfiguration
 import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
+import com.smartisan.music.R
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -43,7 +44,7 @@ class SmartisanNumberPicker @JvmOverloads constructor(
     }
 
     private val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = NormalTextColor
+        color = context.getColor(R.color.number_picker_text)
         textAlign = Paint.Align.CENTER
         typeface = Typeface.DEFAULT_BOLD
     }
@@ -64,8 +65,8 @@ class SmartisanNumberPicker @JvmOverloads constructor(
     private var dragging = false
     private var velocityTracker: VelocityTracker? = null
     private var scrollState = OnScrollListener.SCROLL_STATE_IDLE
-    private var normalTextColor = NormalTextColor
-    private var selectedTextColor = SelectedTextColor
+    private var normalTextColor = context.getColor(R.color.number_picker_text)
+    private var selectedTextColor = context.getColor(R.color.number_picker_text_selected)
     private var normalTextSizePx = context.dp(16f)
     private var selectedTextSizePx = context.dp(18f)
     private val touchSlopPx = viewConfiguration.scaledTouchSlop
@@ -453,7 +454,5 @@ class SmartisanNumberPicker @JvmOverloads constructor(
         const val StepAnimationDurationMs = 300
         const val SnapAnimationDurationMs = 800
         const val FlingDistanceLimit = 0x3fffffff
-        val NormalTextColor = Color.rgb(158, 158, 162)
-        val SelectedTextColor = Color.rgb(80, 121, 217)
     }
 }

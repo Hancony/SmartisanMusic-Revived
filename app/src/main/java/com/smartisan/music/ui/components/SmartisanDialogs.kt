@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -36,35 +37,44 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.smartisan.music.R
 
 internal val SmartisanDialogShape = RoundedCornerShape(12.dp)
-internal val SmartisanDialogBackground = Color.White
-internal val SmartisanDialogDividerColor = Color(0xFFE6E6E6)
-internal val SmartisanDialogTitleStyle = TextStyle(
-    fontSize = 17.sp,
-    fontWeight = FontWeight.SemiBold,
-    color = Color(0xCC000000),
-)
-internal val SmartisanDialogBodyStyle = TextStyle(
-    fontSize = 14.sp,
-    color = Color(0x99000000),
-    textAlign = TextAlign.Center,
-)
-internal val SmartisanDialogMessageStyle = SmartisanDialogBodyStyle.copy(
-    lineHeight = 21.sp,
-)
-internal val SmartisanDialogActionStyle = TextStyle(
-    fontSize = 16.sp,
-    color = Color(0xCC000000),
-    textAlign = TextAlign.Center,
-)
-internal val SmartisanDialogPrimaryActionStyle = SmartisanDialogActionStyle.copy(
-    color = Color(0xFF5E88E8),
-    fontWeight = FontWeight.Medium,
-)
-internal val SmartisanDialogSecondaryActionStyle = SmartisanDialogActionStyle.copy(
-    color = Color(0x8F000000),
-)
+internal val SmartisanDialogBackground: Color
+    @Composable get() = colorResource(R.color.surface_card)
+internal val SmartisanDialogDividerColor: Color
+    @Composable get() = colorResource(R.color.divider_line)
+internal val SmartisanDialogTitleStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.SemiBold,
+        color = colorResource(R.color.text_primary),
+    )
+internal val SmartisanDialogBodyStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 14.sp,
+        color = colorResource(R.color.text_secondary),
+        textAlign = TextAlign.Center,
+    )
+internal val SmartisanDialogMessageStyle: TextStyle
+    @Composable get() = SmartisanDialogBodyStyle.copy(
+        lineHeight = 21.sp,
+    )
+internal val SmartisanDialogActionStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 16.sp,
+        color = colorResource(R.color.text_primary),
+        textAlign = TextAlign.Center,
+    )
+internal val SmartisanDialogPrimaryActionStyle: TextStyle
+    @Composable get() = SmartisanDialogActionStyle.copy(
+        color = colorResource(R.color.accent_blue),
+        fontWeight = FontWeight.Medium,
+    )
+internal val SmartisanDialogSecondaryActionStyle: TextStyle
+    @Composable get() = SmartisanDialogActionStyle.copy(
+        color = colorResource(R.color.text_button),
+    )
 
 private val SmartisanDialogDefaultWidth = 278.dp
 private val SmartisanDialogActionHeight = 52.dp
@@ -134,7 +144,7 @@ internal fun SmartisanDialogActionRow(
         modifier = modifier
             .fillMaxWidth()
             .height(SmartisanDialogActionHeight)
-            .background(if (isPressed) Color(0xFFF5F5F5) else Color.Transparent)
+            .background(if (isPressed) colorResource(R.color.surface_subtle) else Color.Transparent)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,

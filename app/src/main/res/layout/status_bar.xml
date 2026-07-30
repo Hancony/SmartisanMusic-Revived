@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="horizontal" android:background="#e8e8e8" android:layout_width="match_parent" android:layout_height="wrap_content"
+<LinearLayout android:orientation="horizontal" android:background="@color/status_bar_page_background" android:layout_width="match_parent" android:layout_height="wrap_content"
   xmlns:android="http://schemas.android.com/apk/res/android">
     <ImageView android:id="@id/status_bar_album_art" android:layout_width="@dimen/status_bar_album_art" android:layout_height="@dimen/status_bar_album_art" android:src="@drawable/dropdown_menu_noalbumcover_128" android:scaleType="fitXY" android:adjustViewBounds="true" />
     <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8.0dp">
         <RelativeLayout android:id="@id/song_info_zone" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/status_bar_button_info_container_padding_left">
-            <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="#666666" android:id="@id/status_bar_track_name" android:layout_width="match_parent" android:layout_toLeftOf="@id/status_bar_collapse" style="@style/StatusBarText" />
-            <TextView android:textSize="12.0sp" android:textColor="#9a9a9a" android:id="@id/status_bar_artist_name" android:paddingTop="1.0dp" android:layout_width="match_parent" android:layout_toLeftOf="@id/status_bar_collapse" android:layout_below="@id/status_bar_track_name" style="@style/StatusBarText" />
+            <TextView android:textSize="15.0sp" android:textStyle="bold" android:textColor="@color/status_bar_track_text" android:id="@id/status_bar_track_name" android:layout_width="match_parent" android:layout_toLeftOf="@id/status_bar_collapse" style="@style/StatusBarText" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/status_bar_artist_text" android:id="@id/status_bar_artist_name" android:paddingTop="1.0dp" android:layout_width="match_parent" android:layout_toLeftOf="@id/status_bar_collapse" android:layout_below="@id/status_bar_track_name" style="@style/StatusBarText" />
             <ImageButton android:id="@id/status_bar_collapse" android:background="@null" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dp" android:src="@drawable/btn_notification_collapse_selector" android:layout_alignParentRight="true" android:contentDescription="@string/close" style="@style/StatusBarButton" />
         </RelativeLayout>
         <ImageView android:id="@id/status_bar_seperator" android:background="@drawable/dropdown_menu_music_line" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dp" />

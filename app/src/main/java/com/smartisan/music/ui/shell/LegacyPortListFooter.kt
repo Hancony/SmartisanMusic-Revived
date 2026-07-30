@@ -1,7 +1,6 @@
 package com.smartisan.music.ui.shell
 
 import android.content.Context
-import android.graphics.Color
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewGroup
@@ -17,14 +16,14 @@ internal const val LegacyPortListFooterThreshold = 8
 internal class LegacyPortListFooterView(context: Context) : LinearLayout(context) {
     private val body = LinearLayout(context).apply {
         orientation = VERTICAL
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.page_background))
     }
     private val content = TextView(context).apply {
         gravity = Gravity.CENTER
         includeFontPadding = true
-        setTextColor(Color.rgb(0xbc, 0xbc, 0xbc))
+        setTextColor(context.getColor(R.color.footer_text_color))
         setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.footer_text_size))
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.page_background))
         setPadding(
             0,
             resources.getDimensionPixelSize(R.dimen.footer_padding),
@@ -35,7 +34,7 @@ internal class LegacyPortListFooterView(context: Context) : LinearLayout(context
 
     init {
         orientation = VERTICAL
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.page_background))
         body.addView(
             content,
             LayoutParams(

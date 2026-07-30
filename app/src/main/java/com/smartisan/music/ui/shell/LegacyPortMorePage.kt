@@ -21,7 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.viewinterop.AndroidView
 import com.smartisan.music.R
 import com.smartisan.music.data.settings.ArtistSettings
@@ -128,7 +128,7 @@ private fun LegacyMoreRootPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         LegacyPortSmartisanTitleBar(
             modifier = Modifier.fillMaxWidth(),

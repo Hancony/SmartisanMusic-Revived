@@ -49,6 +49,7 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -76,29 +77,35 @@ import kotlinx.coroutines.flow.first
 // - lrc_layout.xml: full-height ListView with 80dp vertical fading edges
 // - lrc_item_layout.xml: text_size_lryric=15sp and lineSpacingExtra=6dp
 // - values-xxhdpi-v4/dimens.xml: lrc_horizontal_padding=53.599976dp
-private val PlaybackLyricsPrimaryStyle = TextStyle(
-    fontSize = 15.sp,
-    fontWeight = FontWeight.Medium,
-    color = Color(0xFF4A69B3),
-    textAlign = TextAlign.Center,
-)
-private val PlaybackLyricsSecondaryStyle = TextStyle(
-    fontSize = 15.sp,
-    color = Color(0xFF4F5050),
-    textAlign = TextAlign.Center,
-)
-private val PlaybackMoreActionTitleStyle = TextStyle(
-    fontSize = 15.sp,
-    color = Color(0x99000000),
-    textAlign = TextAlign.Center,
-)
-private val PlaybackMoreActionButtonStyle = TextStyle(
-    fontSize = 11.sp,
-    color = Color(0x99000000),
-    textAlign = TextAlign.Center,
-)
-private val PlaybackMoreActionSelectedColor = Color(0xFF5C8FE8)
-private val PlaybackMoreActionDividerColor = Color(0xFFE0E0E0)
+private val PlaybackLyricsPrimaryStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 15.sp,
+        fontWeight = FontWeight.Medium,
+        color = colorResource(R.color.panel_action_text),
+        textAlign = TextAlign.Center,
+    )
+private val PlaybackLyricsSecondaryStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 15.sp,
+        color = colorResource(R.color.panel_item_text),
+        textAlign = TextAlign.Center,
+    )
+private val PlaybackMoreActionTitleStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 15.sp,
+        color = colorResource(R.color.text_secondary),
+        textAlign = TextAlign.Center,
+    )
+private val PlaybackMoreActionButtonStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 11.sp,
+        color = colorResource(R.color.text_secondary),
+        textAlign = TextAlign.Center,
+    )
+private val PlaybackMoreActionSelectedColor: Color
+    @Composable get() = colorResource(R.color.accent_blue_selected)
+private val PlaybackMoreActionDividerColor: Color
+    @Composable get() = colorResource(R.color.divider_panel)
 private val PlaybackMoreActionTitleHeight = 51.dp
 private val PlaybackMoreActionRowHeight = 72.dp
 private val PlaybackMoreActionIconSize = 24.dp
@@ -572,7 +579,7 @@ internal fun PlaybackMoreActionPanel(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.background(Color.White),
+        modifier = modifier.background(colorResource(R.color.surface_card)),
     ) {
         PlaybackMoreActionTitleBar(onDismiss = onDismiss)
         PlaybackMoreActionGrid(

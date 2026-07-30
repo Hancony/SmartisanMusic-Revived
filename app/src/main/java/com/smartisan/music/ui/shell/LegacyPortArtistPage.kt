@@ -5,9 +5,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Gravity
@@ -55,8 +53,8 @@ import java.util.Locale
 internal const val ArtistAlbumSwitchBaseDurationMillis = 150L
 internal const val ArtistAlbumSwitchStaggerMillis = 10L
 internal const val LegacyArtistListFooterThreshold = 8
-internal val LegacyArtistPrimaryTextColor = Color.rgb(0x35, 0x35, 0x39)
-internal val LegacyArtistSecondaryTextColor = Color.rgb(0xa4, 0xa7, 0xac)
+internal fun legacyArtistPrimaryTextColor(context: Context): Int = context.getColor(R.color.setting_item_text_color)
+internal fun legacyArtistSecondaryTextColor(context: Context): Int = context.getColor(R.color.list_text_color_small)
 
 internal sealed interface LegacyArtistTarget {
     val artistId: String

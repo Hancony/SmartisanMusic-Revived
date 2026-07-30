@@ -51,6 +51,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -85,33 +86,46 @@ import com.smartisan.music.ui.components.loadArtworkThumbnail
 import com.smartisan.music.ui.shell.titlebar.LegacyPortTitleBarShadow
 import kotlinx.coroutines.launch
 
-private val SearchPageBackground = Color.White
-private val SearchFieldTextColor = Color(0xCC000000)
-private val SearchSectionTitleColor = Color(0x66000000)
-private val SearchDividerColor = Color(0xFFE9E9E9)
-private val SearchSongTitleColor = Color(0xCC000000)
-private val SearchSongPlayingColor = Color(0xFFE64040)
-private val SearchResultHighlightColor = Color(0xFFC14352)
-private val SearchSubtitleColor = Color(0x66000000)
-private val SearchEmptyTextColor = Color(0xFFDBDBDB)
+private val SearchPageBackground: Color
+    @Composable get() = colorResource(R.color.page_background)
+private val SearchFieldTextColor: Color
+    @Composable get() = colorResource(R.color.text_primary)
+private val SearchSectionTitleColor: Color
+    @Composable get() = colorResource(R.color.text_tertiary)
+private val SearchDividerColor: Color
+    @Composable get() = colorResource(R.color.divider_soft)
+private val SearchSongTitleColor: Color
+    @Composable get() = colorResource(R.color.text_primary)
+private val SearchSongPlayingColor: Color
+    @Composable get() = colorResource(R.color.playing_red)
+private val SearchResultHighlightColor: Color
+    @Composable get() = colorResource(R.color.highlight_red)
+private val SearchSubtitleColor: Color
+    @Composable get() = colorResource(R.color.text_tertiary)
+private val SearchEmptyTextColor: Color
+    @Composable get() = colorResource(R.color.text_placeholder)
 
-private val SearchFieldTextStyle = TextStyle(
-    fontSize = 15.sp,
-    color = SearchFieldTextColor,
-)
-private val SearchSectionTitleStyle = TextStyle(
-    fontSize = 15.sp,
-    color = SearchSongTitleColor,
-)
-private val SearchPrimaryTextStyle = TextStyle(
-    fontSize = 16.sp,
-    fontWeight = FontWeight.Medium,
-    color = SearchSongTitleColor,
-)
-private val SearchSecondaryTextStyle = TextStyle(
-    fontSize = 13.sp,
-    color = SearchSubtitleColor,
-)
+private val SearchFieldTextStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 15.sp,
+        color = SearchFieldTextColor,
+    )
+private val SearchSectionTitleStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 15.sp,
+        color = SearchSongTitleColor,
+    )
+private val SearchPrimaryTextStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Medium,
+        color = SearchSongTitleColor,
+    )
+private val SearchSecondaryTextStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 13.sp,
+        color = SearchSubtitleColor,
+    )
 
 private val SearchTopBarHeight = 50.dp
 private val SearchFieldHeight = 32.dp
@@ -365,7 +379,7 @@ private fun SearchTopBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(SearchTopBarHeight + topInset)
-            .background(Color.White)
+            .background(colorResource(R.color.title_bar_background))
             .zIndex(1f),
     ) {
         Row(
@@ -753,7 +767,7 @@ private fun SearchEntityRow(
             ),
     ) {
         SmartisanDrawableBackground(
-            drawableRes = if (pressed) R.drawable.list_item_bgwithoutphoto_down else android.R.color.white,
+            drawableRes = if (pressed) R.drawable.list_item_bgwithoutphoto_down else R.color.surface_card,
             modifier = Modifier.matchParentSize(),
         )
         Row(
@@ -858,7 +872,7 @@ private fun SearchHistoryChip(
         Text(
             text = text,
             style = TextStyle(
-                color = Color(0x66000000),
+                color = colorResource(R.color.text_tertiary),
                 fontSize = 13.5.sp,
             ),
             modifier = Modifier.padding(horizontal = 14.dp),
@@ -873,7 +887,7 @@ private fun SearchNoResultState(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(colorResource(R.color.page_background))
             .padding(top = SearchNoResultTopPadding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

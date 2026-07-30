@@ -46,8 +46,8 @@ import com.smartisan.music.ui.artist.toArtistDisplayNames
 import com.smartisan.music.ui.widgets.StretchTextView
 import java.util.Locale
 
-private val LegacyAlbumDetailPrimaryTextColor = Color.rgb(0x35, 0x35, 0x39)
-private val LegacyAlbumDetailSecondaryTextColor = Color.rgb(0xa4, 0xa7, 0xac)
+private fun legacyAlbumDetailPrimaryTextColor(context: Context): Int = context.getColor(R.color.setting_item_text_color)
+private fun legacyAlbumDetailSecondaryTextColor(context: Context): Int = context.getColor(R.color.list_text_color_small)
 
 @Composable
 internal fun LegacyPortAlbumDetailPage(
@@ -390,7 +390,7 @@ private class LegacyAlbumDetailHeader(context: Context) : LinearLayout(context) 
         addView(
             LinearLayout(context).apply {
                 orientation = HORIZONTAL
-                setBackgroundColor(Color.WHITE)
+                setBackgroundColor(context.getColor(R.color.page_background))
                 addView(
                     LinearLayout(context).apply {
                         gravity = Gravity.CENTER
@@ -690,7 +690,7 @@ internal class LegacyAlbumTrackAdapter : BaseAdapter() {
             isSingleLine = true
             marqueeRepeatLimit = -1
             setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_medium))
-            setTextColor(LegacyAlbumDetailPrimaryTextColor)
+            setTextColor(legacyAlbumDetailPrimaryTextColor(context))
             isDuplicateParentStateEnabled = true
         }
         textZone.addView(
@@ -706,7 +706,7 @@ internal class LegacyAlbumTrackAdapter : BaseAdapter() {
             ellipsize = TextUtils.TruncateAt.END
             isSingleLine = true
             setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.text_size_micro))
-            setTextColor(LegacyAlbumDetailSecondaryTextColor)
+            setTextColor(legacyAlbumDetailSecondaryTextColor(context))
         }
         textZone.addView(
             artist,
@@ -756,7 +756,7 @@ private data class LegacyAlbumTrackViewHolder(
             ?: metadata.title
             ?: ""
         title.isSelected = true
-        title.setTextColor(LegacyAlbumDetailPrimaryTextColor)
+        title.setTextColor(legacyAlbumDetailPrimaryTextColor(title.context))
         if (selected) {
             title.c(playing)
         } else {

@@ -1,7 +1,6 @@
 package com.smartisan.music.ui.widgets.legacy
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.Gravity
@@ -45,7 +44,7 @@ class SmartisanBlankView @JvmOverloads constructor(
                 TextView(context).apply {
                     text = primary
                     gravity = Gravity.CENTER
-                    setTextColor(Color.argb(0x26, 0x00, 0x00, 0x00))
+                    setTextColor(context.getColor(R.color.editor_hint_text_color))
                     setTypeface(typeface, Typeface.BOLD)
                     setSingleLine(true)
                     textSize = 20f
@@ -63,7 +62,7 @@ class SmartisanBlankView @JvmOverloads constructor(
                 TextView(context).apply {
                     text = secondary
                     gravity = Gravity.CENTER
-                    setTextColor(Color.argb(0x26, 0x00, 0x00, 0x00))
+                    setTextColor(context.getColor(R.color.editor_hint_text_color))
                     textSize = 13.5f
                 },
                 LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT).apply {

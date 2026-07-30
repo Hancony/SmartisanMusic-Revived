@@ -43,8 +43,8 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.viewinterop.AndroidView
 import com.smartisan.music.R
 import com.smartisan.music.data.settings.ArtistSettings
@@ -110,7 +110,7 @@ internal fun LegacyPortSettingsPage(
         secondaryKey = secondaryPage,
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
         label = "legacy settings page stack",
         predictiveBackProgress = settingsPredictiveBackState.progress,
         predictiveBackExitConsumed = settingsPredictiveBackState.exitConsumed,
@@ -263,7 +263,7 @@ private fun LegacySettingsRootPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         LegacyPortSmartisanTitleBar(
             modifier = Modifier.fillMaxWidth(),
@@ -315,7 +315,7 @@ private fun LegacyAudioFxSettingsPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         LegacyPortSmartisanTitleBar(
             modifier = Modifier.fillMaxWidth(),
@@ -358,7 +358,7 @@ private fun LegacyNavigationSettingsPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         LegacyPortSmartisanTitleBar(
             modifier = Modifier.fillMaxWidth(),
@@ -1079,7 +1079,7 @@ private class LegacyAudioFxCurveView(context: Context) : View(context) {
     private var activeBandIndex = -1
     private val graphBounds = RectF()
     private val gridPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.rgb(0xe2, 0xe2, 0xe2)
+        color = context.getColor(R.color.input_border)
         strokeWidth = context.dpFloat(1f)
         style = Paint.Style.STROKE
     }
@@ -1106,7 +1106,7 @@ private class LegacyAudioFxCurveView(context: Context) : View(context) {
         color = Color.rgb(0xa6, 0xa6, 0xa6)
     }
     private val handleStrokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = Color.WHITE
+        color = context.getColor(R.color.surface_card)
         strokeWidth = context.dpFloat(1.4f)
         style = Paint.Style.STROKE
     }
@@ -1757,8 +1757,8 @@ private class LegacyArtistSeparatorsDialog(
             setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
             typeface = Typeface.DEFAULT_BOLD
             background = GradientDrawable().apply {
-                setColor(Color.rgb(0xf7, 0xf8, 0xf9))
-                setStroke(context.dpPx(1), Color.rgb(0xe2, 0xe2, 0xe2))
+                setColor(context.getColor(R.color.surface_raised))
+                setStroke(context.dpPx(1), context.getColor(R.color.input_border))
                 cornerRadius = 5f * context.resources.displayMetrics.density
             }
             setOnClickListener {
@@ -1778,7 +1778,7 @@ private class LegacyArtistSeparatorsDialog(
             isClickable = true
             isFocusable = true
             background = GradientDrawable().apply {
-                setColor(Color.rgb(0xfa, 0xfb, 0xfd))
+                setColor(context.getColor(R.color.surface_raised_soft))
                 setStroke(context.dpPx(1), Color.rgb(0xd7, 0xdc, 0xe8))
                 cornerRadius = 7f * context.resources.displayMetrics.density
             }

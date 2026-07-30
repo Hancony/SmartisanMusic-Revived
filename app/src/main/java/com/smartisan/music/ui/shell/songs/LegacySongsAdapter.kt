@@ -1,7 +1,6 @@
 package com.smartisan.music.ui.shell.songs
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -194,7 +193,7 @@ internal class LegacySongsAdapter : BaseAdapter() {
         view.findViewById<TextView>(R.id.listview_item_line_one)?.apply {
             text = title
             isSelected = true
-            setTextColor(LegacyPrimaryTextColor)
+            setTextColor(context.getColor(R.color.setting_item_text_color))
             if (this is StretchTextView) {
                 if (!editMode && selected) {
                     c(currentIsPlaying)
@@ -205,7 +204,7 @@ internal class LegacySongsAdapter : BaseAdapter() {
         }
         view.findViewById<TextView>(R.id.listview_item_line_two)?.apply {
             text = subtitle
-            setTextColor(LegacySecondaryTextColor)
+            setTextColor(context.getColor(R.color.list_text_color_small))
         }
         view.findViewById<TextView>(R.id.tv_play_count)?.text = item.legacyPlayCount().toString()
         view.findViewById<RatingBar>(R.id.rb_score)?.apply {
@@ -348,9 +347,6 @@ private val LegacySongsSortDisplayMode.layoutRes: Int
         LegacySongsSortDisplayMode.PlayCount -> R.layout.item_sort_by_play_count
         LegacySongsSortDisplayMode.AddedTime -> R.layout.item_sort_by_time_layout
     }
-
-private val LegacyPrimaryTextColor = Color.rgb(0x35, 0x35, 0x39)
-private val LegacySecondaryTextColor = Color.rgb(0xa4, 0xa7, 0xac)
 
 private fun MediaItem.legacyQualityBadgeRes(): Int? {
     return when (mediaMetadata.extras?.getString(LocalAudioLibrary.AudioQualityBadgeExtraKey)) {

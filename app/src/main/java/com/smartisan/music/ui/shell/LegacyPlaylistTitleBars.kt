@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.viewinterop.AndroidView
 import com.smartisan.music.R
@@ -101,7 +101,7 @@ internal fun LegacyPlaylistAddModeTitleArea(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.title_bar_background)),
     ) {
         Spacer(
             modifier = Modifier

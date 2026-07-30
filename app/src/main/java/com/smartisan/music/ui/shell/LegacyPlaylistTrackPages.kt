@@ -275,7 +275,7 @@ private class LegacyPlaylistDetailHeader(context: Context) : FrameLayout(context
     private var lastEditMode: Boolean? = null
 
     init {
-        setBackgroundColor(Color.WHITE)
+        setBackgroundColor(context.getColor(R.color.surface_card))
         normalHeader.apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
@@ -291,7 +291,7 @@ private class LegacyPlaylistDetailHeader(context: Context) : FrameLayout(context
         addView(normalHeader, LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT))
 
         editHeader.apply {
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(context.getColor(R.color.surface_card))
             selectAllCheckBox.id = View.generateViewId()
             selectAllCheckBox.buttonDrawable = context.getDrawable(R.drawable.check_box_selector)
             selectAllCheckBox.setPadding(0, 0, 0, 0)

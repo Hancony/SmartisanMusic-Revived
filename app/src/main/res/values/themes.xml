@@ -2,8 +2,8 @@
 <resources>
 
     <style name="Theme.Music" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLightStatusBar">@bool/light_system_bars</item>
+        <item name="android:windowLightNavigationBar">@bool/light_system_bars</item>
     </style>
 
     <style name="MmsDialogTheme" parent="@android:style/Theme.Dialog">

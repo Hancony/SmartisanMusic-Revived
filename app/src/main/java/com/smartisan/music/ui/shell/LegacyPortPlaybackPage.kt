@@ -1,7 +1,6 @@
 package com.smartisan.music.ui.shell
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.text.TextUtils
 import android.util.TypedValue
@@ -44,10 +43,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
@@ -135,7 +134,7 @@ internal fun LegacyPortPlaybackPage(
     BoxWithConstraints(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         val screenHeightPx = with(density) { maxHeight.roundToPx() }
         val playerOffsetY by animateFloatAsState(
@@ -285,7 +284,7 @@ private fun LegacyPortPlaybackTitleBar(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.title_bar_background)),
     ) {
         Spacer(
             modifier = Modifier
@@ -300,7 +299,7 @@ private fun LegacyPortPlaybackTitleBar(
                 TitleBar(context).apply {
                     setTitleBarHeight(resources.getDimensionPixelSize(R.dimen.titlebar_height))
                     setShadowVisible(false)
-                    setBackgroundColor(Color.WHITE)
+                    setBackgroundColor(context.getColor(R.color.title_bar_background))
                 }
             },
             update = { titleBar ->
@@ -325,7 +324,7 @@ private fun TitleBar.setupLegacyPlaybackTitleBar(
 ) {
     setTitleBarHeight(resources.getDimensionPixelSize(R.dimen.titlebar_height))
     setShadowVisible(false)
-    setBackgroundColor(Color.WHITE)
+    setBackgroundColor(context.getColor(R.color.title_bar_background))
     removeAllLeftViews()
     removeAllRightViews()
     if (queueVisible) {

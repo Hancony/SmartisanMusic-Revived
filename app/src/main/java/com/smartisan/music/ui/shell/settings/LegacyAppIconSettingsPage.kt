@@ -20,7 +20,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.viewinterop.AndroidView
 import com.smartisan.music.R
 import com.smartisan.music.launcher.AppIcon
@@ -39,7 +39,7 @@ internal fun LegacyAppIconSettingsPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         LegacyPortSmartisanTitleBar(
             modifier = Modifier.fillMaxWidth(),

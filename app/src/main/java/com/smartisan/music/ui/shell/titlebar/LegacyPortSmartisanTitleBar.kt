@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
@@ -34,7 +34,7 @@ internal fun LegacyPortSmartisanTitleBar(
         modifier = modifier
             .then(if (showShadow) Modifier.zIndex(1f) else Modifier)
             .fillMaxWidth()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.title_bar_background)),
     ) {
         if (includeStatusBar) {
             Spacer(

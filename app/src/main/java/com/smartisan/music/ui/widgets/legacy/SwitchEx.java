@@ -2,6 +2,7 @@ package com.smartisan.music.ui.widgets.legacy;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -103,6 +104,7 @@ public class SwitchEx extends CheckBox {
     private static float buttonOnPosition;
     private static float buttonOffPosition;
     private static int cachedBitmapDensityDpi;
+    private static int cachedBitmapNightMode;
 
     private final Handler handler;
     private final Resources resources;
@@ -192,7 +194,7 @@ public class SwitchEx extends CheckBox {
     }
 
     public static void initSwitchBitmap(Resources resources) {
-        if (isDensityDpiChanged(resources)) {
+        if (isResourceConfigurationChanged(resources)) {
             clearSwitchBitmap(false);
         }
         if (bottom == null || buttonNormal == null || frame == null || mask == null
@@ -242,10 +244,15 @@ public class SwitchEx extends CheckBox {
         pressedScale = changeScaleThroughDpi(PRESSED_DEF_SCALE, densityDpi);
         framePressedScale = changeScaleThroughDpi(FRAME_PRESSED_DEF_SCALE, densityDpi);
         cachedBitmapDensityDpi = densityDpi;
+        cachedBitmapNightMode =
+            resources.getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
     }
 
-    private static boolean isDensityDpiChanged(Resources resources) {
-        return cachedBitmapDensityDpi != resources.getConfiguration().densityDpi;
+    private static boolean isResourceConfigurationChanged(Resources resources) {
+        Configuration configuration = resources.getConfiguration();
+        return cachedBitmapDensityDpi != configuration.densityDpi
+            || cachedBitmapNightMode
+                != (configuration.uiMode & Configuration.UI_MODE_NIGHT_MASK);
     }
 
     private static void setAccessibilityChecked(AccessibilityNodeInfo info, boolean checked) {
@@ -530,7 +537,7 @@ public class SwitchEx extends CheckBox {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (isClean || isDensityDpiChanged(resources)) {
+        if (isClean || isResourceConfigurationChanged(resources)) {
             initSwitchBitmap(resources);
         }
         canvas.save();

@@ -1,16 +1,23 @@
 package com.smartisan.music.ui.playback
 
 import androidx.compose.animation.core.Easing
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.smartisan.music.R
 
-internal val PlaybackPageBackground = Color.White
-private val PlaybackTitleColor = Color(0xFF6B6B6F)
-private val PlaybackSubtitleColor = Color(0x88333333)
-private val PlaybackTimeColor = Color(0xFF737272)
+internal val PlaybackPageBackground: Color
+    @Composable get() = colorResource(R.color.page_background)
+private val PlaybackTitleColor: Color
+    @Composable get() = colorResource(R.color.playing_title_text)
+private val PlaybackSubtitleColor: Color
+    @Composable get() = colorResource(R.color.playing_subtitle_text)
+private val PlaybackTimeColor: Color
+    @Composable get() = colorResource(R.color.playing_time_text)
 
 internal const val PlaybackDiscCycleDurationMs = 15_500f
 internal const val ScratchCycleDurationMs = 1_800f
@@ -115,17 +122,20 @@ internal fun playbackEntranceProgress(
     return 1f - inverse * inverse * inverse
 }
 
-internal val PlaybackTitleStyle = TextStyle(
-    fontSize = 18.sp,
-    fontWeight = FontWeight.SemiBold,
-    color = PlaybackTitleColor,
-)
-internal val PlaybackArtistStyle = TextStyle(
-    fontSize = 11.sp,
-    color = PlaybackSubtitleColor,
-)
-internal val PlaybackTimeStyle = TextStyle(
-    fontSize = 12.sp,
-    fontWeight = FontWeight.Normal,
-    color = PlaybackTimeColor,
-)
+internal val PlaybackTitleStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 18.sp,
+        fontWeight = FontWeight.SemiBold,
+        color = PlaybackTitleColor,
+    )
+internal val PlaybackArtistStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 11.sp,
+        color = PlaybackSubtitleColor,
+    )
+internal val PlaybackTimeStyle: TextStyle
+    @Composable get() = TextStyle(
+        fontSize = 12.sp,
+        fontWeight = FontWeight.Normal,
+        color = PlaybackTimeColor,
+    )

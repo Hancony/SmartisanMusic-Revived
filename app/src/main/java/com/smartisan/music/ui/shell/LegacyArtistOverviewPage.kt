@@ -106,7 +106,7 @@ private class LegacyArtistOverviewAdapter : BaseAdapter() {
         view.setBackgroundResource(R.drawable.listview_selector)
         view.findViewById<TextView>(R.id.listview_item_line_one)?.apply {
             text = artist.name
-            setTextColor(LegacyArtistPrimaryTextColor)
+            setTextColor(legacyArtistPrimaryTextColor(context))
         }
         view.findViewById<TextView>(R.id.listview_item_line_two)?.apply {
             val albumCount = parent.context.resources.getQuantityString(
@@ -124,7 +124,7 @@ private class LegacyArtistOverviewAdapter : BaseAdapter() {
                 albumCount,
                 trackCount,
             )
-            setTextColor(LegacyArtistSecondaryTextColor)
+            setTextColor(legacyArtistSecondaryTextColor(context))
         }
         return view
     }

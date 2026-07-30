@@ -47,8 +47,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
@@ -91,8 +91,10 @@ private const val FolderHiddenAlpha = 0.3f
 private const val FolderVisibilityAnimationMillis = 300L
 private const val FolderEditTransitionMillis = 200L
 
-private val FolderPrimaryTextColor = Color.rgb(0x35, 0x35, 0x39)
-private val FolderSecondaryTextColor = Color.rgb(0xa4, 0xa7, 0xac)
+private val View.FolderPrimaryTextColor: Int
+    get() = context.getColor(R.color.setting_item_text_color)
+private val View.FolderSecondaryTextColor: Int
+    get() = context.getColor(R.color.list_text_color_small)
 
 private data class LegacyFolderTarget(
     val key: String,
@@ -176,7 +178,7 @@ internal fun LegacyPortFolderPage(
     Box(
         modifier = modifier
             .fillMaxSize()
-            .background(ComposeColor.White),
+            .background(colorResource(R.color.page_background)),
     ) {
         val titleAreaHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding() +
             dimensionResource(R.dimen.title_bar_height)
@@ -1210,7 +1212,7 @@ private class LegacyFolderBlankView(
             TextView(context).apply {
                 text = primaryText
                 gravity = Gravity.CENTER
-                setTextColor(Color.rgb(0xc8, 0xc8, 0xc8))
+                setTextColor(context.getColor(R.color.text_disabled_gray))
                 setTextSize(TypedValue.COMPLEX_UNIT_SP, 25f)
                 includeFontPadding = false
             },
@@ -1221,7 +1223,7 @@ private class LegacyFolderBlankView(
                 TextView(context).apply {
                     text = secondaryText
                     gravity = Gravity.CENTER
-                    setTextColor(Color.rgb(0xc8, 0xc8, 0xc8))
+                    setTextColor(context.getColor(R.color.text_disabled_gray))
                     setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
                     includeFontPadding = false
                 },
