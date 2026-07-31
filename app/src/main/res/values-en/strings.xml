@@ -182,7 +182,6 @@
     <string name="can_not_add_to_queue_single_repeat">Cannot add songs to the queue while repeating one song</string>
     <string name="love">Like</string>
     <string name="cancel_love">Unlike</string>
-    <string name="set_ringtone">Set ringtone</string>
     <string name="djing">Scratch</string>
     <string name="delete">Delete</string>
     <string name="playback_delete_success">Song deleted</string>
@@ -191,6 +190,7 @@
     <string name="can_not_delete_cue_file">Cannot delete a single song from a CUE track</string>
     <string name="scratch">Scratch</string>
     <string name="share">Share</string>
+    <string name="can_not_share_song">This song cannot be shared</string>
     <string name="sleep_timer">Sleep timer</string>
     <string name="lyrics">Lyrics</string>
     <string name="always_on">Keep screen on</string>
@@ -228,13 +228,7 @@
     <string name="time_1_5h">1 hour 30 minutes</string>
     <string name="time_2h">2 hours</string>
     <string name="time_countdown">Countdown running</string>
-    <string name="choise_seting_name">Set this song as ringtone?</string>
-    <string name="ring_success">Ringtone set</string>
-    <string name="ring_fault">Failed to set ringtone</string>
-    <string name="can_not_set_ringtone">This song cannot be set as ringtone</string>
     <string name="remain_time">Remaining time</string>
-    <string name="ringtone_permission_message">Music needs permission to modify system settings. Enable \"Allow modify system settings\" on the system page, then return to continue setting the current song as ringtone.</string>
-    <string name="ringtone_permission_missing">Allow modifying system settings before setting a ringtone</string>
     <string name="sleep_timer_stopped">Sleep timer turned off</string>
     <string name="audio_permission_title">Audio permission required</string>
     <string name="audio_permission_subtitle">Grant permission to scan local music and show your songs</string>

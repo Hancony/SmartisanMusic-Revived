@@ -29,7 +29,7 @@ Smartisan OS has left the stage, so this project uses Smartisan Music 8.1.0 as i
 - **Expanded playback screen**: Embedded lyrics, a sleep timer, and a reorderable queue complement the original turntable and controls.
 - **New personalization options**: Custom artist separators, reorderable and pinnable bottom navigation, switchable app icons, and lightweight sound effects are added. Alongside the original icon, the yellow vinyl icon from realme UI 7.0 Music is preserved with color and monochrome layers adapted to Android's adaptive-icon specification. Sound effects include several presets and a custom equalizer curve.
 - **Refined turntable interaction**: Tonearm dragging, vinyl rotation, scratching, crackle audio, and playback-state transitions are reimplemented for modern touch handling, lifecycles, and frame timing.
-- **Richer library actions**: Multi-select, swipe actions, playlist insertion, ringtone assignment, and version-appropriate MediaStore deletion authorization are supported. Audio can also be opened directly from file managers and other apps.
+- **Richer library actions**: Multi-select, swipe actions, playlist insertion, audio-file sharing, and version-appropriate MediaStore deletion authorization are supported. Audio can also be opened directly from file managers and other apps.
 - **Android 8.1 and later support**: Separate compatibility paths cover legacy and scoped storage, system bars, gesture navigation, display cutouts, WindowInsets, and predictive back without replacing the original visual language.
 - **Modern data architecture**: Room, DataStore, Coroutines, and StateFlow manage the library, favorites, playlists, settings, and playback state without private Smartisan OS services or system-signature capabilities.
 - **Removed legacy baggage**: Business code is written in Kotlin and retains only the resources and public APIs required by the current implementation. The original background services, databases, and settings migrations are not carried forward.
@@ -48,8 +48,8 @@ Smartisan OS has left the stage, so this project uses Smartisan Music 8.1.0 as i
 - Vinyl turntable, draggable tonearm, scratching, and crackle audio
 - Static, line-synchronized, and word-timed lyrics embedded in audio files
 - Original, Bass, Clear, Vocal, Rock, and custom sound profiles
-- Sleep timer, system music volume control, and ringtone assignment
-- External audio opening and MediaStore-backed media deletion
+- Sleep timer and system music volume control
+- External audio opening, audio-file sharing, and MediaStore-backed media deletion
 - Custom artist separators, bottom-navigation order and pinned items, and switchable app icons
 
 ## Local media and permissions
@@ -59,9 +59,8 @@ The final app manifest does not contain the `INTERNET` permission. The app does 
 - Android 13 and later use `READ_MEDIA_AUDIO` to read device audio. Android 8.1 through Android 12 use the version-limited `READ_EXTERNAL_STORAGE` permission.
 - `FOREGROUND_SERVICE_MEDIA_PLAYBACK` is used only to keep user-initiated playback and its media notification active in the background.
 - `MODIFY_AUDIO_SETTINGS` supports playback effects and system music volume control, while `VIBRATE` provides interaction feedback.
-- `WRITE_SETTINGS` is used only when the user explicitly chooses “Set ringtone.” The app opens the system authorization screen first and cannot modify system settings without explicit approval.
 - For song deletion, Android 11 and later use the system batch confirmation flow, while Android 10 grants access per file. Android 8.1 and Android 9 request `WRITE_EXTERNAL_STORAGE` only after the user confirms deletion, then delete through MediaStore.
-- The app does not request location, camera, microphone, contacts, SMS, overlay, or accessibility permissions.
+- The app does not request modify-system-settings, location, camera, microphone, contacts, SMS, overlay, or accessibility permissions.
 
 ## Screenshots
 

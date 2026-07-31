@@ -1,9 +1,10 @@
 package com.smartisan.music.ui.playback
 
+import android.content.ClipData
 import android.content.ContentResolver
 import android.content.Context
+import android.content.Intent
 import android.media.AudioManager
-import android.media.RingtoneManager
 import android.net.Uri
 import android.provider.MediaStore
 import android.widget.Toast
@@ -16,6 +17,7 @@ import androidx.media3.common.Player
 import com.smartisan.music.R
 import com.smartisan.music.platform.media.audioMediaItemUri
 import com.smartisan.music.playback.LocalAudioLibrary
+import java.util.Locale
 import kotlin.math.roundToInt
 
 internal fun Player?.snapshot(volume: Float = 1f): PlaybackScreenState {
@@ -57,8 +59,48 @@ internal fun MediaItem.resolveDeleteTarget(): PlaybackDeleteTargetResult {
     )
 }
 
+internal fun MediaItem.canShareAudio(): Boolean {
+    return localConfiguration?.uri?.scheme == ContentResolver.SCHEME_CONTENT
+}
+
+internal fun Context.tryShareAudio(mediaItem: MediaItem): Boolean {
+    val shareUri = mediaItem.localConfiguration?.uri
+        ?.takeIf { it.scheme == ContentResolver.SCHEME_CONTENT }
+        ?: return false
+    val title = mediaItem.mediaMetadata.title
+        ?.toString()
+        ?.takeIf(String::isNotBlank)
+        ?: getString(R.string.unknown_song_title)
+    val mimeType = sequenceOf(
+        mediaItem.localConfiguration?.mimeType,
+        runCatching { contentResolver.getType(shareUri) }.getOrNull(),
+    ).mapNotNull { candidate ->
+        candidate
+            ?.trim()
+            ?.lowercase(Locale.ROOT)
+            ?.takeIf(String::isShareableAudioMimeType)
+    }.firstOrNull() ?: DefaultAudioShareMimeType
+    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+        type = mimeType
+        clipData = ClipData.newRawUri(title, shareUri)
+        putExtra(Intent.EXTRA_STREAM, shareUri)
+        putExtra(Intent.EXTRA_TITLE, title)
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+    val chooserIntent = Intent.createChooser(sendIntent, getString(R.string.share)).apply {
+        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    }
+    return runCatching {
+        startActivity(chooserIntent)
+    }.isSuccess
+}
+
 private fun Uri.isMediaStoreUri(): Boolean {
     return scheme == ContentResolver.SCHEME_CONTENT && authority == MediaStore.AUTHORITY
+}
+
+private fun String.isShareableAudioMimeType(): Boolean {
+    return startsWith("audio/") || this in ShareableApplicationAudioMimeTypes
 }
 
 internal fun nextPlaybackRepeatMode(repeatMode: Int): Int {
@@ -130,16 +172,6 @@ internal fun Context.toast(stringRes: Int) {
     Toast.makeText(this, getString(stringRes), Toast.LENGTH_SHORT).show()
 }
 
-internal fun Context.trySetDefaultRingtone(ringtoneUri: Uri): Boolean {
-    return runCatching {
-        RingtoneManager.setActualDefaultRingtoneUri(
-            this,
-            RingtoneManager.TYPE_RINGTONE,
-            ringtoneUri,
-        )
-    }.isSuccess
-}
-
 internal fun formatPlaybackTime(positionMs: Long): String {
     val totalSeconds = (positionMs / 1_000L).coerceAtLeast(0L)
     val hours = totalSeconds / 3_600L
@@ -158,3 +190,11 @@ internal fun fractionFromPosition(positionX: Float, trackWidthPx: Int): Float {
     if (trackWidthPx <= 0) return 0f
     return (positionX / trackWidthPx.toFloat()).coerceIn(0f, 1f)
 }
+
+private const val DefaultAudioShareMimeType = "audio/*"
+
+private val ShareableApplicationAudioMimeTypes = setOf(
+    "application/ogg",
+    "application/x-ogg",
+    "application/itunes",
+)

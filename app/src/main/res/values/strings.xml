@@ -174,7 +174,6 @@
     <string name="can_not_add_to_queue_single_repeat">单曲循环下不能添加歌曲至播放队列</string>
     <string name="love">喜欢</string>
     <string name="cancel_love">取消喜欢</string>
-    <string name="set_ringtone">设置铃声</string>
     <string name="djing">打碟</string>
     <string name="delete">删除</string>
     <string name="playback_delete_success">歌曲已删除</string>
@@ -183,6 +182,7 @@
     <string name="can_not_delete_cue_file">整轨文件不允许删除单一歌曲</string>
     <string name="scratch">划碟</string>
     <string name="share">分享</string>
+    <string name="can_not_share_song">这首歌曲无法分享</string>
     <string name="sleep_timer">定时关闭播放</string>
     <string name="lyrics">歌词</string>
     <string name="always_on">常亮</string>
@@ -220,13 +220,7 @@
     <string name="time_1_5h">1 小时 30 分钟</string>
     <string name="time_2h">2 小时</string>
     <string name="time_countdown">正在倒计时</string>
-    <string name="choise_seting_name">是否将此歌曲设置为铃声?</string>
-    <string name="ring_success">设置铃声成功</string>
-    <string name="ring_fault">设置铃声失败</string>
-    <string name="can_not_set_ringtone">这首歌曲不能设置为铃声</string>
     <string name="remain_time">剩余时间</string>
-    <string name="ringtone_permission_message">需要允许音乐修改系统设置。请在系统页面打开“允许修改系统设置”后返回，应用会继续设置当前歌曲为铃声。</string>
-    <string name="ringtone_permission_missing">需要允许修改系统设置后才能设置铃声</string>
     <string name="sleep_timer_stopped">已关闭定时播放</string>
     <string name="audio_permission_title">需要读取音频权限</string>
     <string name="audio_permission_subtitle">授权后才能扫描本地音乐并显示歌曲列表</string>

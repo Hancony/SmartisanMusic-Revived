@@ -3,13 +3,8 @@ package com.smartisan.music.ui.playback
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
-import android.net.Uri
-import android.provider.Settings
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -73,12 +68,10 @@ import com.smartisan.music.ui.components.MediaStoreDeleteItem
 import com.smartisan.music.ui.components.loadEmbeddedArtwork
 import com.smartisan.music.ui.components.peekArtworkThumbnail
 import com.smartisan.music.ui.components.rememberMediaStoreDeleteCoordinator
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.math.abs
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -139,11 +132,8 @@ fun PlaybackScreen(
     }
     var showMorePanel by rememberSaveable { mutableStateOf(false) }
     var showSleepTimerDialog by rememberSaveable { mutableStateOf(false) }
-    var showSetRingtoneDialog by rememberSaveable { mutableStateOf(false) }
-    var showWriteSettingsDialog by rememberSaveable { mutableStateOf(false) }
     var currentVisualPage by rememberSaveable { mutableStateOf(PlaybackVisualPage.Cover) }
     var keepLyricsScreenAwake by rememberSaveable { mutableStateOf(false) }
-    var pendingRingtoneUriString by rememberSaveable { mutableStateOf<String?>(null) }
     var sleepTimerWasActive by remember { mutableStateOf(false) }
     var coverPageState by remember(state.mediaItem?.mediaId) {
         mutableStateOf(PlaybackCoverPageState())
@@ -163,35 +153,6 @@ fun PlaybackScreen(
         )
     }
 
-    val applyPendingRingtone by rememberUpdatedState(
-        newValue = {
-            val ringtoneUriString = pendingRingtoneUriString
-            pendingRingtoneUriString = null
-            val ringtoneUri = ringtoneUriString
-                ?.takeIf { it.isNotBlank() }
-                ?.let(Uri::parse)
-                ?: run {
-                    context.toast(R.string.can_not_set_ringtone)
-                    return@rememberUpdatedState
-                }
-            scope.launch {
-                val success = withContext(Dispatchers.IO) {
-                    context.applicationContext.trySetDefaultRingtone(ringtoneUri)
-                }
-                context.toast(if (success) R.string.ring_success else R.string.ring_fault)
-            }
-        },
-    )
-    val writeSettingsLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult(),
-    ) {
-        if (Settings.System.canWrite(context)) {
-            applyPendingRingtone()
-        } else {
-            pendingRingtoneUriString = null
-            context.toast(R.string.ringtone_permission_missing)
-        }
-    }
     val deleteCoordinator = rememberMediaStoreDeleteCoordinator(
         onDeleted = { mediaIds ->
             controller.removeMediaItemsByMediaIds(mediaIds)
@@ -916,11 +877,10 @@ fun PlaybackScreen(
             scratchEnabled = playbackSettings.scratchEnabled,
             sleepTimerActive = sleepTimerState.isActive,
             addToPlaylistEnabled = !currentIsExternalAudio,
+            shareEnabled = currentMediaItem?.canShareAudio() == true,
             showSleepTimerDialog = showSleepTimerDialog,
             sleepTimerState = sleepTimerState,
             bottomInsetPx = (bottomInset.value * density.density).roundToInt(),
-            showSetRingtoneDialog = showSetRingtoneDialog,
-            showWriteSettingsDialog = showWriteSettingsDialog,
             onAddToPlaylistClick = {
                 state.mediaItem?.let { onRequestAddToPlaylist(listOf(it)) }
                 showMorePanel = false
@@ -943,9 +903,12 @@ fun PlaybackScreen(
                 }
                 showMorePanel = false
             },
-            onSetRingtoneClick = {
+            onShareClick = {
                 showMorePanel = false
-                showSetRingtoneDialog = true
+                val mediaItem = state.mediaItem
+                if (mediaItem == null || !context.tryShareAudio(mediaItem)) {
+                    context.toast(R.string.can_not_share_song)
+                }
             },
             onSleepTimerClick = {
                 showMorePanel = false
@@ -998,41 +961,7 @@ fun PlaybackScreen(
                     }
                 }
             },
-            onSetRingtoneConfirm = {
-                showSetRingtoneDialog = false
-                val ringtoneUri = state.mediaItem?.localConfiguration?.uri
-                if (ringtoneUri == null) {
-                    context.toast(R.string.can_not_set_ringtone)
-                } else {
-                    pendingRingtoneUriString = ringtoneUri.toString()
-                    if (Settings.System.canWrite(context)) {
-                        applyPendingRingtone()
-                    } else {
-                        showWriteSettingsDialog = true
-                    }
-                }
-            },
-            onSetRingtoneDismiss = {
-                showSetRingtoneDialog = false
-            },
-            onWriteSettingsConfirm = {
-                showWriteSettingsDialog = false
-                val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS).apply {
-                    data = Uri.parse("package:${context.packageName}")
-                }
-                if (intent.resolveActivity(context.packageManager) == null) {
-                    pendingRingtoneUriString = null
-                    context.toast(R.string.ring_fault)
-                } else {
-                    writeSettingsLauncher.launch(intent)
-                }
-            },
-            onWriteSettingsDismiss = {
-                showWriteSettingsDialog = false
-                pendingRingtoneUriString = null
-            },
         )
-
     }
 }
 

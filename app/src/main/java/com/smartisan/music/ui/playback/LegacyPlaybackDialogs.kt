@@ -38,9 +38,9 @@ internal data class LegacyPlaybackMoreActionCallbacks(
     val onAddToPlaylistClick: () -> Unit,
     val onAddToQueueClick: () -> Unit,
     val onFavoriteToggle: () -> Unit,
+    val onShareClick: () -> Unit,
     val onLyricsToggle: () -> Unit,
     val onSleepTimerClick: () -> Unit,
-    val onSetRingtoneClick: () -> Unit,
     val onScratchToggle: () -> Unit,
     val onDeleteClick: () -> Unit,
     val onDismissRequest: () -> Unit,
@@ -54,6 +54,7 @@ internal fun LegacyPlaybackMoreActionsOverlay(
     scratchEnabled: Boolean,
     sleepTimerActive: Boolean,
     addToPlaylistEnabled: Boolean,
+    shareEnabled: Boolean,
     callbacks: LegacyPlaybackMoreActionCallbacks,
     modifier: Modifier = Modifier,
 ) {
@@ -79,6 +80,7 @@ internal fun LegacyPlaybackMoreActionsOverlay(
                     scratchEnabled = scratchEnabled,
                     sleepTimerActive = sleepTimerActive,
                     addToPlaylistEnabled = addToPlaylistEnabled,
+                    shareEnabled = shareEnabled,
                     callbacks = callbacks,
                 )
                 if (visible) {
@@ -221,6 +223,7 @@ private class LegacyPlaybackMoreActionsView(
         scratchEnabled: Boolean,
         sleepTimerActive: Boolean,
         addToPlaylistEnabled: Boolean,
+        shareEnabled: Boolean,
         callbacks: LegacyPlaybackMoreActionCallbacks,
     ) {
         itemAdapter.callbacks = callbacks
@@ -230,6 +233,7 @@ private class LegacyPlaybackMoreActionsView(
             scratchEnabled = scratchEnabled,
             sleepTimerActive = sleepTimerActive,
             addToPlaylistEnabled = addToPlaylistEnabled,
+            shareEnabled = shareEnabled,
             callbacks = callbacks,
         )
         itemAdapter.setItems(items)
@@ -677,6 +681,7 @@ private fun buildMoreActions(
     scratchEnabled: Boolean,
     sleepTimerActive: Boolean,
     addToPlaylistEnabled: Boolean,
+    shareEnabled: Boolean,
     callbacks: LegacyPlaybackMoreActionCallbacks,
 ): List<MoreActionItem> {
     return listOf(
@@ -721,11 +726,6 @@ private fun buildMoreActions(
             onClick = callbacks.onSleepTimerClick,
         ),
         MoreActionItem(
-            labelRes = R.string.set_ringtone,
-            iconRes = R.drawable.more_select_icon_ringtone,
-            onClick = callbacks.onSetRingtoneClick,
-        ),
-        MoreActionItem(
             labelRes = R.string.djing,
             iconRes = if (scratchEnabled) {
                 R.drawable.more_select_icon_djing_on
@@ -739,6 +739,13 @@ private fun buildMoreActions(
             labelRes = R.string.delete,
             iconRes = R.drawable.more_select_icon_delete,
             onClick = callbacks.onDeleteClick,
+        ),
+        MoreActionItem(
+            labelRes = R.string.share,
+            iconRes = R.drawable.more_select_icon_share,
+            pressedIconRes = R.drawable.more_select_icon_share_down,
+            enabled = shareEnabled,
+            onClick = callbacks.onShareClick,
         ),
     )
 }

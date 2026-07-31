@@ -567,10 +567,11 @@ internal fun PlaybackMoreActionPanel(
     sleepTimerActive: Boolean,
     bottomInset: Dp,
     addToPlaylistEnabled: Boolean = true,
+    shareEnabled: Boolean = true,
     onAddToPlaylistClick: () -> Unit,
     onAddToQueueClick: () -> Unit,
     onFavoriteToggle: () -> Unit,
-    onSetRingtoneClick: () -> Unit,
+    onShareClick: () -> Unit,
     onSleepTimerClick: () -> Unit,
     onLyricsToggle: () -> Unit,
     onScratchToggle: () -> Unit,
@@ -588,10 +589,11 @@ internal fun PlaybackMoreActionPanel(
             scratchEnabled = scratchEnabled,
             sleepTimerActive = sleepTimerActive,
             addToPlaylistEnabled = addToPlaylistEnabled,
+            shareEnabled = shareEnabled,
             onAddToPlaylistClick = onAddToPlaylistClick,
             onAddToQueueClick = onAddToQueueClick,
             onFavoriteToggle = onFavoriteToggle,
-            onSetRingtoneClick = onSetRingtoneClick,
+            onShareClick = onShareClick,
             onSleepTimerClick = onSleepTimerClick,
             onLyricsToggle = onLyricsToggle,
             onScratchToggle = onScratchToggle,
@@ -638,10 +640,11 @@ private fun PlaybackMoreActionGrid(
     scratchEnabled: Boolean,
     sleepTimerActive: Boolean,
     addToPlaylistEnabled: Boolean,
+    shareEnabled: Boolean,
     onAddToPlaylistClick: () -> Unit,
     onAddToQueueClick: () -> Unit,
     onFavoriteToggle: () -> Unit,
-    onSetRingtoneClick: () -> Unit,
+    onShareClick: () -> Unit,
     onSleepTimerClick: () -> Unit,
     onLyricsToggle: () -> Unit,
     onScratchToggle: () -> Unit,
@@ -699,13 +702,6 @@ private fun PlaybackMoreActionGrid(
             PlaybackMoreActionDivider(vertical = false)
             PlaybackMoreActionRow {
                 PlaybackMoreActionButton(
-                    label = stringResource(R.string.set_ringtone),
-                    normalRes = R.drawable.more_select_icon_ringtone,
-                    pressedRes = R.drawable.more_select_icon_ringtone,
-                    onClick = onSetRingtoneClick,
-                )
-                PlaybackMoreActionDivider(vertical = true)
-                PlaybackMoreActionButton(
                     label = stringResource(R.string.sleep_timer),
                     normalRes = R.drawable.more_select_icon_timer,
                     pressedRes = R.drawable.more_select_icon_timer,
@@ -728,6 +724,14 @@ private fun PlaybackMoreActionGrid(
                     normalRes = R.drawable.more_select_icon_delete,
                     pressedRes = R.drawable.more_select_icon_delete,
                     onClick = onDeleteClick,
+                )
+                PlaybackMoreActionDivider(vertical = true)
+                PlaybackMoreActionButton(
+                    label = stringResource(R.string.share),
+                    normalRes = R.drawable.more_select_icon_share,
+                    pressedRes = R.drawable.more_select_icon_share_down,
+                    enabled = shareEnabled,
+                    onClick = onShareClick,
                 )
             }
         }

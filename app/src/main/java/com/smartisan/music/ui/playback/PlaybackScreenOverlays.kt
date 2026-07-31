@@ -3,9 +3,7 @@ package com.smartisan.music.ui.playback
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.zIndex
-import com.smartisan.music.R
 import com.smartisan.music.playback.PlaybackSleepTimerState
 
 @Composable
@@ -16,15 +14,14 @@ internal fun PlaybackMoreActionOverlays(
     scratchEnabled: Boolean,
     sleepTimerActive: Boolean,
     addToPlaylistEnabled: Boolean,
+    shareEnabled: Boolean,
     showSleepTimerDialog: Boolean,
     sleepTimerState: PlaybackSleepTimerState,
     bottomInsetPx: Int,
-    showSetRingtoneDialog: Boolean,
-    showWriteSettingsDialog: Boolean,
     onAddToPlaylistClick: () -> Unit,
     onAddToQueueClick: () -> Unit,
     onFavoriteToggle: () -> Unit,
-    onSetRingtoneClick: () -> Unit,
+    onShareClick: () -> Unit,
     onSleepTimerClick: () -> Unit,
     onLyricsToggle: () -> Unit,
     onScratchToggle: () -> Unit,
@@ -32,10 +29,6 @@ internal fun PlaybackMoreActionOverlays(
     onDismissMorePanel: () -> Unit,
     onSleepTimerDismiss: () -> Unit,
     onSleepTimerDurationSelected: (Long) -> Unit,
-    onSetRingtoneConfirm: () -> Unit,
-    onSetRingtoneDismiss: () -> Unit,
-    onWriteSettingsConfirm: () -> Unit,
-    onWriteSettingsDismiss: () -> Unit,
 ) {
     LegacyPlaybackMoreActionsOverlay(
         visible = showMorePanel,
@@ -44,13 +37,14 @@ internal fun PlaybackMoreActionOverlays(
         scratchEnabled = scratchEnabled,
         sleepTimerActive = sleepTimerActive,
         addToPlaylistEnabled = addToPlaylistEnabled,
+        shareEnabled = shareEnabled,
         callbacks = LegacyPlaybackMoreActionCallbacks(
             onAddToPlaylistClick = onAddToPlaylistClick,
             onAddToQueueClick = onAddToQueueClick,
             onFavoriteToggle = onFavoriteToggle,
+            onShareClick = onShareClick,
             onLyricsToggle = onLyricsToggle,
             onSleepTimerClick = onSleepTimerClick,
-            onSetRingtoneClick = onSetRingtoneClick,
             onScratchToggle = onScratchToggle,
             onDeleteClick = onDeleteClick,
             onDismissRequest = onDismissMorePanel,
@@ -70,26 +64,4 @@ internal fun PlaybackMoreActionOverlays(
             .fillMaxSize()
             .zIndex(9f),
     )
-
-    if (showSetRingtoneDialog) {
-        PlaybackConfirmDialog(
-            title = stringResource(R.string.set_ringtone),
-            message = stringResource(R.string.choise_seting_name),
-            confirmText = stringResource(R.string.done),
-            dismissText = stringResource(R.string.cancel),
-            onConfirm = onSetRingtoneConfirm,
-            onDismiss = onSetRingtoneDismiss,
-        )
-    }
-
-    if (showWriteSettingsDialog) {
-        PlaybackConfirmDialog(
-            title = stringResource(R.string.set_ringtone),
-            message = stringResource(R.string.ringtone_permission_message),
-            confirmText = stringResource(R.string.continue_action),
-            dismissText = stringResource(R.string.cancel),
-            onConfirm = onWriteSettingsConfirm,
-            onDismiss = onWriteSettingsDismiss,
-        )
-    }
 }
