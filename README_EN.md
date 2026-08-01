@@ -100,7 +100,7 @@ To verify the minified release build, run:
 ./gradlew assembleRelease
 ```
 
-The release APK is written to `app/build/outputs/apk/release/SmartisanMusic-Revived-0.1.1.apk`.
+The release APK is written to `app/build/outputs/apk/release/SmartisanMusic-Revived-0.2.0.apk`.
 
 ## Acknowledgments
 
